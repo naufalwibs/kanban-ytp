@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="64286484094-9papg0k5moappbj7gk3qi1jpiiee5fv4.apps.googleusercontent.com">
+  <title>Kanban</title>
+
+  <link rel="shortcut icon" href="./asset/favicon.ico" type="image/x-icon">
+
+  <!-- CSS Styleshet -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a5b26f850d.js" crossorigin="anonymous"></script>
+
+  <!-- Google-Button -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- NAVBAR BEFORE LOGIN -->
+    <nav id="nav-before-login" class="navbar navbar-expand-lg navbar-light bg-light" v-if="navbar == false">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./asset/kanban-logo-brand.png" alt="" width="100" class="d-inline-block align-top brand-radius">
+            </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#">Pricing</a>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+<!-- NAVBAR AFTER LOGIN -->
+    <nav id="nav-after-login" class="navbar navbar-expand-lg navbar-light bg-light" v-if="navbar == true">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./asset/kanban-logo-brand.png" alt="" width="100" class="d-inline-block align-top brand-radius">
+            </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>                       
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" v-on:click.prevent="btn_logout">Logout</a>                        
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+<!-- TITLE -->
+    <div class="container" id="title-page" v-if="page === 'login' || page === 'register'">
+        <div class="col-lg title-padding">
+            <h1 class="text-center header"> Kanban </h1>
+            <h3 class="text-center tag-line"> - Your Tracking Partner - </h3>
+        </div>
+    </div>
+
+<!-- LOGIN PAGE -->
+<div class="container" id="login-page" v-if="page === 'login'">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="col">
+                <img class="resize-laptop" src="./asset/kanban-mac.png" alt="laptop-kanban">
+                <p>"Kanban" is the Japanese word for "visual signal." If you work in services or technology, your work is often times invisible and intangible. A kanban board helps make your work visible so you can show it to others and keep everyone on the same page.</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img class="resize-phone" src="./asset/kanban-phone.png" alt="phone-kanban">
+                    </div>
+                    <div class="col-lg-6 btn-pad">
+                        <div class="d-flex flex-column">
+                            <button type="button" class="btn btn-lg btn-width"><i class="fas fa-globe-asia"></i> Webpage </button>
+                            <button type="button" class="btn btn-dark btn-lg btn-width"><i class="fab fa-apple"></i> Download</button>
+                            <button type="button" class="btn btn-outline-light btn-lg btn-width"><i class="fab fa-google-play"></i> Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-lg-6 backlay">
+                <main class="form-signin">
+                    <form>
+                        <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+                        <label for="inputEmail" class="d-none">Email address</label>
+                        <input v-model="email" type="email" id="email-login" class="form-control" placeholder="Email address" required autofocus>
+                        <label for="inputPassword" class="d-none">Password</label>
+                        <input v-model="password" type="password" id="email-password" class="form-control" placeholder="Password" required>
+                        <div class="checkbox mb-3">
+                            <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                            </label>
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit" v-on:click.prevent="btn_login">Sign in</button>
+                        <label  class="btn-reg-pad" for="register">Don't have an account? </label>
+                        <button class="w-100 btn btn-lg btn-primary btn-reg-pad" type="submit" v-on:click.prevent="register_page">Register</button>
+                        <div id="btn-google-login" class="g-signin2" data-onsuccess="onSignIn">
+                        </div>
+                        <p class="mt-5 mb-3 text-center">&copy; 2021</p>
+                    </form>
+                </main>
+        </div>
+    </div>
+</div>
+
+<!-- REGISTER PAGE -->
+<div class="container" id="register-page" v-if="page === 'register'">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="col">
+                <img class="resize-laptop" src="./asset/kanban-mac.png" alt="laptop-kanban">
+                <p>"Kanban" is the Japanese word for "visual signal." If you work in services or technology, your work is often times invisible and intangible. A kanban board helps make your work visible so you can show it to others and keep everyone on the same page.</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img class="resize-phone" src="./asset/kanban-phone.png" alt="phone-kanban">
+                    </div>
+                    <div class="col-lg-6 btn-pad">
+                        <div class="d-flex flex-column align-self-center">
+                            <button type="button" class="btn btn-lg btn-width"><i class="fas fa-globe-asia"></i> Webpage </button>
+                            <button type="button" class="btn btn-dark btn-lg btn-width"><i class="fab fa-apple"></i> Download</button>
+                            <button type="button" class="btn btn-outline-light btn-lg btn-width"><i class="fab fa-google-play"></i> Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-lg-6 backlay">
+                <main class="form-signin">
+                    <form>
+                        <h1 class="h3 mb-3 fw-normal text-center">Feel free to register</h1>
+                        <label for="email-register" class="d-none">Email address</label>
+                        <input v-model="email" type="email" id="email-register" class="form-control top" placeholder="Email address" required autofocus>
+                        <label for="password-register" class="d-none">Password</label>
+                        <input v-model="password" type="password" id="password-register" class="form-control middle" placeholder="Password" required>
+                        <label for="repeat-password-register" class="d-none">Repeat Password</label>
+                        <input v-model="repeatPassword" type="password" id="repeat-password-register" class="form-control bottom" placeholder="Repeat Password" required>
+                        <div class="checkbox mb-3">
+                            <label>
+                            <input type="checkbox" value="remember-me"> I accept term & condition.
+                            </label>
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit" v-on:click.prevent="btn_register">Sign up</button>
+                        <label  class="btn-reg-pad" for="back-to-sign-in">Have an account? </label>
+                        <button class="w-100 btn btn-lg btn-primary btn-reg-pad" type="submit" v-on:click.prevent="login_page">Back to Sign in</button>
+                        <p class="mt-5 mb-3 text-center">&copy; 2021</p>
+                    </form>
+                </main>
+        </div>
+    </div>
+</div>
+
+<!-- KANBAN HOME PAGE -->
+<div class="container-fluid" id="kanban-page" v-if="page === 'kanban'">
+    <div class="bigger-heading">
+        <h1 class="text-center"> Kanban Board </h1>
+        <h3 class="text-center"> - Hello, {{user}} - </h3>
+    </div>
+
+    <div class="container-fluid d-flex justify-content-center">
+        <a href="#" class="btn btn-primary btn-add-margin" v-on:click.prevent="openAddTask"> <i class="fas fa-plus-circle"></i> Add Task </a>
+    </div>
+        <div class="row">
+
+
+            <!-- BACKLOG -->
+            <div class="col-lg-3">
+                <div class="card padding-category">
+                    <h5 class="text-center kanban-header">Backlog</h5>
+                </div>
+                <div class="scrollable">
+                    <div class="card">
+                        <div class="card-body" v-for="kanban in kanbans.tasks" v-if="kanban.category === 'backlog'">
+                        <div class="card bg-light" >
+                            <div class="card-header">{{ kanban.title }}</div>
+                            <div class="row align-self-center">
+                                <div class="">
+                                <p class="card-text p-kanban-top">By: {{ kanban.User.email }}</p>
+                                <p class="card-text p-kanban-bot">{{ kanban.createdAt }}</p>
+                                  <div class="crud-btn">
+                                      <i v-on:click.prevent="openEditTaskAll(kanban.id);" class="fas fa-edit"></i>
+                                      <i v-on:click.prevent="openEditTaskCategory(kanban.id)" class="fas fa-exchange-alt"></i>
+                                      <i v-on:click.prevent="deleteTask(kanban.id)" class="fas fa-trash-alt"></i>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TODO -->
+            <div class="col-lg-3">
+                <div class="card padding-category">
+                    <h5 class="text-center kanban-header">Todo</h5>
+                </div>
+
+                <div class="scrollable">
+                    <div class="card">
+                        <div class="card-body" v-for="kanban in kanbans.tasks" v-if="kanban.category === 'todo'">
+                        <div class="card bg-light" >
+                            <div class="card-header">{{ kanban.title }}</div>
+                            <div class="row align-self-center">
+                                <div class="">
+                                <p class="card-text p-kanban-top">By: {{ kanban.User.email }}</p>
+                                <p class="card-text p-kanban-bot">{{ changeDate(kanban.createdAt) }}</p>
+                                <div class="crud-btn">
+                                    <i v-on:click.prevent="openEditTaskAll(kanban.id)" class="fas fa-edit"></i>
+                                    <i v-on:click.prevent="openEditTaskCategory(kanban.id)" class="fas fa-exchange-alt"></i>
+                                    <i v-on:click.prevent="deleteTask(kanban.id)" class="fas fa-trash-alt"></i>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DOING -->
+            <div class="col-lg-3">
+                <div class="card padding-category">
+                    <h5 class="text-center kanban-header">Doing</h5>
+                </div>
+                <div class="scrollable">
+                    <div class="card">
+                        <div class="card-body" v-for="kanban in kanbans.tasks" v-if="kanban.category === 'doing'">
+                        <div class="card bg-light">
+                            <div class="card-header">{{ kanban.title }}</div>
+                            <div class="row align-self-center">
+                                <div class="">
+                                <p class="card-text p-kanban-top">By: {{ kanban.User.email }}</p>
+                                <p class="card-text p-kanban-bot">{{ kanban.createdAt }}</p>
+                                <div class="crud-btn">
+                                    <i v-on:click.prevent="openEditTaskAll(kanban.id)" class="fas fa-edit"></i>
+                                    <i v-on:click.prevent="openEditTaskCategory(kanban.id)" class="fas fa-exchange-alt"></i>
+                                    <i v-on:click.prevent="deleteTask(kanban.id)" class="fas fa-trash-alt"></i>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+            <!-- DONE -->
+            <div class="col-lg-3">
+                <div class="card padding-category">
+                    <h5 class="text-center kanban-header">Done</h5>
+                </div>
+
+                <div class="scrollable">
+                    <div class="card">
+                        <div class="card-body" v-for="kanban in kanbans.tasks" v-if="kanban.category === 'done'">
+                          <div class="card bg-light">
+                            <div class="card-header">{{ kanban.title }}</div>
+                            <div class="row align-self-center">
+                                <div class="">
+                                  <p class="card-text p-kanban-top">By: {{ kanban.User.email }}</p>
+                                  <p class="card-text p-kanban-bot">{{ kanban.createdAt }}</p>
+                                  <div class="crud-btn">
+                                      <i v-on:click.prevent="openEditTaskAll(kanban.id)" class="fas fa-edit"></i>
+                                      <i v-on:click.prevent="openEditTaskCategory(kanban.id)" class="fas fa-exchange-alt"></i>
+                                      <i v-on:click.prevent="deleteTask(kanban.id)" class="fas fa-trash-alt"></i>
+                                  </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+        <!-- MODAL ADD FORM -->
+    <div class="container">
+        <div class="overlay" id="add-task" v-if="addTask == true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">New Task</h5>
+                          <button type="button" class="close" data-dismiss="modal" v-on:click.prevent="closeAddTask">
+                            <span>&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="form-group">
+                                <label for="category-add" class="col-form-label">Category :</label>
+                                <select id="category-add" class="form-control" aria-label="Default select example" v-model="category">
+                                  <option selected disabled>-- Select Category --</option>
+                                  <option value="backlog">Backlog</option>
+                                  <option value="todo">Todo</option>
+                                  <option value="doing">Doing</option>
+                                  <option value="done">Done</option>
+                                </select>
+                              </div>
+                            <div class="form-group">
+                              <label for="message-text-add" class="col-form-label">Task:</label>
+                              <textarea class="form-control" id="message-text-add" v-model="newTask"></textarea>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click.prevent="closeAddTask">Close</button>
+                          <button type="button" class="btn btn-primary" v-on:click.prevent="addKanban">Add Task</button>
+                        </div>
+                      </div>
+                    </div>
+        </div>
+    </div>
+
+        <!-- MODAL EDIT FORM -->
+        <div class="container">
+            <div class="overlay" id="edit-task" v-if="editTask == true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Edit Task</h5>
+                              <button type="button" class="close" data-dismiss="modal" v-on:click.prevent="closeAddTask">
+                                <span>&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <!-- <div class="form-group"> -->
+                                    <!-- <label for="category" class="col-form-label">Category :</label>
+                                    <select id="description" class="form-control" aria-label="Default select example" v-model="category">
+                                      <option selected disabled>-- Select Category --</option>
+                                      <option value="backlogs">Backlog</option>
+                                      <option value="todos">Todo</option>
+                                      <option value="doings">Doing</option>
+                                      <option value="dones">Done</option>
+                                    </select> -->
+                                  <!-- </div> -->
+                                <div class="form-group">
+                                  <label for="message-text" class="col-form-label">Task:</label>
+                                  <textarea class="form-control" id="message-text-edit" v-model="editTaskText" v-text="currentTaskData.task">{{ currentTaskData.task }}</textarea>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click.prevent="closeEditTaskAll">Close</button>
+                              <button type="button" class="btn btn-primary" v-on:click.prevent="editTaskAll">Edit Task</button>
+                            </div>
+                          </div>
+                        </div>
+                </div>
+            </div>
+
+<!-- PATCH CATEGORY -->
+    <div class="overlay" id="category-patch" v-if="editCategory === true">
+        <div class="container">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Update Category</h5>
+                      <button type="button" class="close" data-dismiss="modal" v-on:click.prevent="closeEditTaskCategory">
+                        <span>&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="category-name" class="col-form-label">Category :</label>
+                          <select class="form-control" aria-label="Default select example" v-model="category">
+                            <option selected disabled>-- Select Category --</option>
+                            <option value="backlog">Backlog</option>
+                            <option value="todo">Todo</option>
+                            <option value="doing">Doing</option>
+                            <option value="done">Done</option>
+                          </select>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button v-on:click.prevent="closeEditCategory" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button v-on:click.prevent="editCategoryKanban" type="button" class="btn btn-primary">Edit Task</button>
+                    </div>
+                  </div>
+                </div>
+        </div>
+    </div>
+
+
+
+<!-- /DIV ID APP -->
+</div>
+  <!-- Swal2 Scripts -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <!-- Bootstrap Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+  <!-- Vue Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <!-- Axios Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+
+</html>

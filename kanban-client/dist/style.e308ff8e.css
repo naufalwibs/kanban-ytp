@@ -1,0 +1,152 @@
+body {
+    align-items: center;
+    background-image: url(/kanban-project-bg.d6623a2f.png);
+    font-family: 'Nunito', sans-serif;
+  }
+
+.header {
+    font-weight:900;
+    color:rgb(17, 49, 143);
+    font-size: 3rem;
+}
+
+.btn-pad {
+    padding: 1.75%;
+}
+
+.btn-width {
+    width: 70%;
+    margin: 1.25% auto;
+}
+
+.tag-line{
+    font-weight: 100;
+    font-size: 1.2rem;
+}
+
+.title-padding {
+    padding: 3% 0;
+}
+
+.resize-laptop{
+    width: 100%;
+}
+
+.btn-reg-pad {
+    margin-top: 3%;
+}
+
+.backlay {
+    background-color: rgba(116, 161, 179, 0.447);
+    border-radius: 10px;
+    padding-top: 8%;
+}
+
+.resize-phone{
+    width: 100%;
+    margin: 7.5% 0;
+    /* padding-left: 100px; */
+}
+
+.brand-radius{
+    border-radius: 5px;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.top {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    }
+.middle {
+    border-radius: 0;
+    margin-bottom: -2px;
+    }
+    
+.bottom {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    }
+
+.crud-btn {
+    margin: auto 0;
+    /* padding-left: 3rem; */
+    opacity: 0.3;
+}
+
+.crud-btn:hover {
+    opacity: 1;
+}
+
+.p-kanban-top {
+    margin: 0;
+    padding: 16px 10px 0 0;
+}
+
+.p-kanban-bot {
+    margin: 0;
+    padding: 0 10px 5px 0;
+}
+
+.kanban-header {
+    margin-top: 5%;
+    margin-bottom: 0;
+}
+
+.scrollable{
+    overflow-y: auto;
+    max-height: 480px;
+}
+
+.padding-category {
+    padding-bottom: 5%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px);
+    z-index: 100;
+}
+
+.bigger-heading {
+    margin-top: 2%;
+}
+
+.btn-add-margin {
+    margin: 3% 0;
+}
+
+.margin-top-gbtn {
+    margin-top: 10%;
+}
+
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

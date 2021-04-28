@@ -1,0 +1,83 @@
+{
+  "Users": [
+    {
+      "id": 1,
+      "email": "test@mail.com",
+      "password": "123456"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Task 1 yo edit ayeee ntapp",
+      "UserId": 1,
+      "category": "backlog",
+      "createdAt": "2021-03-10 23:25:57.492+07",
+      "updatedAt": "2021-03-11T14:54:13.898Z",
+      "id": 1
+    },
+    {
+      "title": "Task 2 yo aeseee",
+      "UserId": 1,
+      "category": "todo",
+      "createdAt": "2021-03-10 23:25:57.492+07",
+      "updatedAt": "2021-03-11T14:55:43.709Z",
+      "id": 2
+    },
+    {
+      "title": "Task 3 yo asdasda",
+      "UserId": 1,
+      "category": "doing",
+      "createdAt": "2021-03-10 23:25:57.492+07",
+      "updatedAt": "2021-03-11T14:55:47.925Z",
+      "id": 3
+    },
+    {
+      "title": "Task 4 yo ntaaap",
+      "UserId": 1,
+      "category": "done",
+      "createdAt": "2021-03-10 23:25:57.492+07",
+      "updatedAt": "2021-03-11T14:55:53.741Z",
+      "id": 4
+    },
+    {
+      "title": "Machinimaaa",
+      "category": "todo",
+      "UserId": 1,
+      "createdAt": "2021-03-11T13:57:59.408Z",
+      "updatedAt": "2021-03-11T13:57:59.408Z",
+      "id": 5
+    },
+    {
+      "title": "Test Again to Todo",
+      "category": "done",
+      "UserId": 1,
+      "createdAt": "2021-03-11T13:58:32.529Z",
+      "updatedAt": "2021-03-11T13:58:32.529Z",
+      "id": 6
+    },
+    {
+      "title": "Test again brather",
+      "category": "doing",
+      "UserId": 1,
+      "createdAt": "2021-03-11T13:59:13.289Z",
+      "updatedAt": "2021-03-11T13:59:13.289Z",
+      "id": 7
+    },
+    {
+      "title": "Whoa whoa worked",
+      "category": "backlog",
+      "UserId": 1,
+      "createdAt": "2021-03-11T13:59:22.573Z",
+      "updatedAt": "2021-03-11T13:59:22.573Z",
+      "id": 8
+    },
+    {
+      "title": "Test Ajaaa, biar mantapu jiwa",
+      "category": "doing",
+      "UserId": 1,
+      "createdAt": "2021-03-11T14:56:15.693Z",
+      "updatedAt": "2021-03-11T14:56:15.693Z",
+      "id": 9
+    }
+  ]
+}

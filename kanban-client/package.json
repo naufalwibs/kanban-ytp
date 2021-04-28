@@ -1,0 +1,31 @@
+{
+  "name": "kanban-client",
+  "version": "1.0.0",
+  "description": "website untuk managing task",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naufalwibs/kanban-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naufalwibs/kanban-client/issues"
+  },
+  "homepage": "https://github.com/naufalwibs/kanban-client#readme",
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.2.0",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "sweetalert2": "^10.15.5",
+    "vue": "^2.6.12",
+    "vue-google-login": "^2.0.5",
+    "vue-hot-reload-api": "^2.3.4"
+  }
+}
